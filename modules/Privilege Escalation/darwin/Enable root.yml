@@ -1,0 +1,16 @@
+id: 62933e77-9c3c-49be-9152-6990a654abf9
+name: Enable root
+description: This procedure will enable the root account using the defined password.
+tactic: privilege-escalation
+technique:
+  id: T1078
+  name: Valid Accounts
+platforms:
+  darwin:
+    sh:
+      command: dsenableroot -u #{discovery.local.existing.user} -p #{discovery.local.existing.user.password} -r #{privilege-escalation.local.new.user.password}
+metadata:
+  authors:
+    - bfuzzy1
+  tags: []
+  version: 1

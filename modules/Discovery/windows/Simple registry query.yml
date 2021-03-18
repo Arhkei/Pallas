@@ -1,0 +1,24 @@
+id: 2488245e-bcbd-405d-920e-2de27db882b3
+metadata:
+  version: 2
+  authors:
+    - privateducky
+    - MITRE
+    - w0rk3r
+  tags: []
+name: Simple registry query
+description: |
+  The Windows registry is a configuration database for a computer. It can be queried using keys. This procedure returns
+  the value for a given registry key.
+tactic: discovery
+technique:
+  id: T1012
+  name: Query Registry
+platforms:
+  windows:
+    psh:
+      command: |
+        Get-ItemProperty -Path #{registry.key}
+    cmd:
+      command: |
+        reg query #{registry.key}

@@ -1,0 +1,17 @@
+id: 5b4a7cf6-6bcf-11eb-9439-0242ac130002 
+metadata:
+  version: 1
+  authors: 
+    - Abhishek S (abhiabhi2306)
+  tags: []
+name: Dump all network configuration data
+description: |
+   This command will display all of the system's network configuration information using an approach that is less likely to trigger blue-team monitoring systems.tactic: discovery
+tactic: discovery
+technique:
+  id: T1082
+  name: System Information Discovery
+platforms:
+  linux:
+    sh:
+      command: cat /proc/net/*

