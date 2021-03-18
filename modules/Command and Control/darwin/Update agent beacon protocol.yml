@@ -1,0 +1,35 @@
+id: 23c5cb2f-3f6f-4770-b260-13edf23f5903
+metadata:
+  version: 1
+  authors:
+    - khyberspache
+  tags: []
+name: Update agent beacon protocol
+description: |
+  Tasks agent to swap C2 protocol to a different protocol.
+tactic: 'command-and-control'
+technique:
+  id: T1573.001
+  name: "Encrypted Channel: Symmetric Cryptography"
+platforms:
+  windows:
+    keyword:
+      command: 'config.{"Contact": "udp", "Address": "#{operator.udp}"}'
+      variants:
+        - command: 'config.{"Contact": "tcp", "Address": "#{operator.tcp}"}'
+        - command: 'config.{"Contact": "http", "Address": "#{operator.http}"}'
+        - command: 'config.{"Contact": "grpc", "Address": "#{operator.grpc}"}'
+  darwin:
+    keyword:
+      command: 'config.{"Contact": "udp", "Address": "#{operator.udp}"}'
+      variants:
+        - command: 'config.{"Contact": "tcp", "Address": "#{operator.tcp}"}'
+        - command: 'config.{"Contact": "http", "Address": "#{operator.http}"}'
+        - command: 'config.{"Contact": "grpc", "Address": "#{operator.grpc}"}'
+  linux:
+    keyword:
+      command: 'config.{"Contact": "udp", "Address": "#{operator.udp}"}'
+      variants:
+        - command: 'config.{"Contact": "tcp", "Address": "#{operator.tcp}"}'
+        - command: 'config.{"Contact": "http", "Address": "#{operator.http}"}'
+        - command: 'config.{"Contact": "grpc", "Address": "#{operator.grpc}"}'
