@@ -12,7 +12,7 @@ if _platform == "linux" or _platform == "linux2":
 elif _platform == "darwin":
     osInfo = "darwin"
     CLEAR = "clear"
-elif _platform == "win32" or _platform == "win64":
+elif _platform == "win32":
     osInfo = "windows"
     CLEAR = "cls"
 else:
