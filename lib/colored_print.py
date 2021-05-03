@@ -1,8 +1,10 @@
-from ctypes import windll
+import sys
 
-#Enables ANSI escape codes
-k = windll.kernel32
-k.SetConsoleMode(k.GetStdHandle(-11), 7)
+if sys.platform == "win32":
+    from ctypes import windll
+    #Enables ANSI escape sequences
+    k = windll.kernel32
+    k.SetConsoleMode(k.GetStdHandle(-11), 7)
 
 class colors:
     RED = '\033[1;31m'
@@ -24,5 +26,5 @@ class colors:
 
     ENDC = '\033[0m'
 
-    def cprint(color, message, end = None):
+    def cprint(color, message, end=None):
         print(color + message + colors.ENDC, end=end)
