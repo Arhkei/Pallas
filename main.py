@@ -3,16 +3,15 @@ import os
 from os.path import expanduser
 import time
 import sys
-from sys import platform as _platform
 import yaml
 
-if _platform == "linux" or _platform == "linux2":
+if sys.platform == "linux" or sys.platform == "linux2":
     osInfo = "linux"
     CLEAR = "clear"
-elif _platform == "darwin":
+elif sys.platform == "darwin":
     osInfo = "darwin"
     CLEAR = "clear"
-elif _platform == "win32":
+elif sys.platform == "win32":
     osInfo = "windows"
     CLEAR = "cls"
 else:
