@@ -98,7 +98,7 @@ def submoduleChoice(files):
         if "--name" in choice:
             print(f"Name: {submoduleInfo['name']}")
         if "--desc" in choice:
-            print(f"Name: {submoduleInfo['description']}")
+            print(f"Description: {submoduleInfo['description']}")
         if "--platforms" in choice:
             for platform in submoduleInfo["platforms"]:
                 print("Platforms:")
