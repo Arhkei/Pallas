@@ -8,7 +8,10 @@ import os
 from shutil import copyfile, rmtree
 
 cwd = os.getcwd()
-rmtree (f"{cwd}\\sorted")
+try:
+	rmtree (f"{cwd}\\sorted")
+except FileNotFoundError:
+	pass
 os.mkdir(f"{cwd}\\sorted")
 os.mkdir(f"{cwd}\\sorted\\darwin")
 os.mkdir(f"{cwd}\\sorted\\global")
